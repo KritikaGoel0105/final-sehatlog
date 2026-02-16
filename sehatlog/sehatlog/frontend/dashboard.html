@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SehatLog</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>🏥 SehatLog</h2>
+            </div>
+            
+            <div class="sidebar-user">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <div class="user-info">
+                    <h4 id="userName">User</h4>
+                    <span class="user-role" id="userRole">Role</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="overview">
+                    <span class="nav-icon">📊</span>
+                    <span>Overview</span>
+                </a>
+                <a href="#" class="nav-item" data-view="patients" id="navPatients">
+                    <span class="nav-icon">👥</span>
+                    <span>Patients</span>
+                </a>
+                <a href="#" class="nav-item" data-view="documents" id="navDocuments">
+                    <span class="nav-icon">📄</span>
+                    <span>Documents</span>
+                </a>
+                <a href="#" class="nav-item" data-view="ai-tools" id="navAiTools">
+                    <span class="nav-icon">🤖</span>
+                    <span>AI Tools</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" id="logoutBtn">
+                    <span>🚪</span> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h1 id="pageTitle">Dashboard</h1>
+                <div class="header-actions">
+                    <button class="btn-icon" title="Notifications">
+                        <span>🔔</span>
+                    </button>
+                    <button class="btn-icon" title="Settings">
+                        <span>⚙️</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Overview View -->
+                <div id="overviewView" class="view-content active">
+                    <div class="stats-grid" id="statsGrid">
+                        <!-- Stats will be populated by JS -->
+                    </div>
+
+                    <div class="quick-actions" id="quickActions">
+                        <!-- Quick actions will be populated by JS -->
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div id="recentActivity">
+                            <!-- Activity will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patients View -->
+                <div id="patientsView" class="view-content">
+                    <div class="view-header">
+                        <h2>Patients</h2>
+                        <button class="btn-primary" id="addPatientBtn" style="display: none;">
+                            <span>➕</span> Add Patient
+                        </button>
+                    </div>
+
+                    <div class="patients-list" id="patientsList">
+                        <!-- Patients will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Documents View -->
+                <div id="documentsView" class="view-content">
+                    <h2>Documents</h2>
+                    <div class="documents-list" id="documentsList">
+                        <!-- Documents will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- AI Tools View -->
+                <div id="aiToolsView" class="view-content">
+                    <h2>🤖 AI-Powered Tools</h2>
+                    <div class="ai-tools-grid">
+                        <div class="ai-tool-card">
+                            <div class="ai-tool-icon">📝</div>
+                            <h3>Generate Clinical Summary</h3>
+                            <p>AI-powered analysis of patient data to generate comprehensive clinical summaries</p>
+                            <button class="btn-primary" id="generateSummaryBtn">Generate Summary</button>
+                        </div>
+
+                        <div class="ai-tool-card">
+                            <div class="ai-tool-icon">📋</div>
+                            <h3>Check Missing Documents</h3>
+                            <p>Automatically identify required documents that are missing from patient records</p>
+                            <button class="btn-primary" id="checkMissingBtn">Check Documents</button>
+                        </div>
+
+                        <div class="ai-tool-card">
+                            <div class="ai-tool-icon">🏥</div>
+                            <h3>Generate Discharge Summary</h3>
+                            <p>Create comprehensive discharge documentation with AI assistance</p>
+                            <button class="btn-primary" id="generateDischargeBtn">Generate Discharge</button>
+                        </div>
+                    </div>
+
+                    <div id="aiResultsContainer" class="ai-results-container">
+                        <!-- AI results will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Add Patient -->
+    <div id="addPatientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Patient</h3>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="addPatientForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientName">Full Name *</label>
+                        <input type="text" id="patientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientPhone">Phone *</label>
+                        <input type="tel" id="patientPhone" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientAge">Age *</label>
+                        <input type="number" id="patientAge" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientGender">Gender *</label>
+                        <select id="patientGender" required>
+                            <option value="">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientBloodGroup">Blood Group</label>
+                        <select id="patientBloodGroup">
+                            <option value="">Select</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientDoctor">Assigned Doctor</label>
+                        <input type="text" id="patientDoctor">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="patientAddress">Address</label>
+                    <textarea id="patientAddress" rows="2"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="patientEmergency">Emergency Contact</label>
+                    <input type="tel" id="patientEmergency">
+                </div>
+
+                <div class="form-group">
+                    <label for="patientDiagnosis">Diagnosis</label>
+                    <textarea id="patientDiagnosis" rows="3"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" id="cancelModalBtn">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Patient</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Patient Details -->
+    <div id="patientDetailModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="patientDetailTitle">Patient Details</h3>
+                <button class="modal-close" id="closeDetailModalBtn">&times;</button>
+            </div>
+            <div id="patientDetailContent">
+                <!-- Patient details will be populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

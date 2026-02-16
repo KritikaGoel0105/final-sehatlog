@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SehatLog</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <div class="auth-brand">
+                <h1>🏥 SehatLog</h1>
+                <p>AI-Powered Healthcare Documentation</p>
+            </div>
+            <div class="auth-features">
+                <div class="auth-feature">
+                    <span class="feature-check">✓</span>
+                    <span>Secure role-based access</span>
+                </div>
+                <div class="auth-feature">
+                    <span class="feature-check">✓</span>
+                    <span>AI-assisted clinical summaries</span>
+                </div>
+                <div class="auth-feature">
+                    <span class="feature-check">✓</span>
+                    <span>Real-time patient monitoring</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                    <button class="auth-tab" data-tab="patient">Patient Login</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active">
+                    <h2>Welcome Back</h2>
+                    <p class="auth-subtitle">Login to your account</p>
+
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="admin@sehatlog.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full">Login</button>
+
+                    <div class="auth-hint">
+                        <p><strong>Demo Credentials:</strong></p>
+                        <p>Admin: admin@sehatlog.com / Admin123</p>
+                        <p>Doctor: doctor@sehatlog.com / Doctor123</p>
+                    </div>
+                </form>
+
+                <!-- Signup Form -->
+                <form id="signupForm" class="auth-form">
+                    <h2>Create Account</h2>
+                    <p class="auth-subtitle">Join SehatLog today</p>
+
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="Dr. Sarah Smith" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="your.email@hospital.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Create a strong password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupRole">Role</label>
+                        <select id="signupRole" required>
+                            <option value="">Select your role</option>
+                            <option value="admin">Administrator</option>
+                            <option value="doctor">Doctor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-note">
+                        <p><strong>Note:</strong> Patients cannot self-signup. Patients are created by administrators.</p>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full">Create Account</button>
+                </form>
+
+                <!-- Patient Login Form -->
+                <form id="patientLoginForm" class="auth-form">
+                    <h2>Patient Portal</h2>
+                    <p class="auth-subtitle">Access your health records</p>
+
+                    <div class="form-group">
+                        <label for="patientId">Patient ID</label>
+                        <input type="text" id="patientId" placeholder="P1001" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="patientPhone">Registered Phone Number</label>
+                        <input type="tel" id="patientPhone" placeholder="9999999999" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full">Login</button>
+
+                    <div class="auth-hint">
+                        <p><strong>Demo Patient:</strong></p>
+                        <p>Patient ID: P1001</p>
+                        <p>Phone: 9999999999</p>
+                    </div>
+                </form>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+            </div>
+
+            <div class="auth-footer">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
